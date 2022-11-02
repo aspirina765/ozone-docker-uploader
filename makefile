@@ -19,7 +19,7 @@ run: ## Build the container
 
 # Escala para 10 nós
 scale: ## Escala para 10 nós
-	docker-compose scale datanode=16
+	docker-compose scale datanode=10
 
 # Cria S3 bucket no Ozone
 create-s3: ## Cria um S3 bucket no Ozone
@@ -31,15 +31,8 @@ testfile: ## Cria arquivo de teste
 
 # Upload do arquivo ao S3 bucket do Ozone
 upload: ## Upload do arquivo ao S3 bucket do Ozone
-	aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  ./proxmox-ve_7.2-1.iso  s3://bucket1/testfile
+	aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile
 	
-#aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  ./proxmox-ve_7.2-1.iso  s3://bucket1/testfile
-	
-# aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile
-
-# /home/rhel9dev/TW
-# ./proxmox-ve_7.2-1.iso
-
 # Lista arquivos e verifica o upload do arquivo de teste
 listfiles: ## Lista arquivos e verifica o upload
 	aws s3 --endpoint http://localhost:9878 ls s3://bucket1/testfile
